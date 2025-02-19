@@ -1,0 +1,11 @@
+{
+    "name": "fintech/fintech",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require": {
+        "dompdf/dompdf": "^3.1"
+    }
+}
