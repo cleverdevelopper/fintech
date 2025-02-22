@@ -1,0 +1,77 @@
+  <!-- ======= Header ======= -->
+  {{navbar}}
+  <!-- ======= Sidebar ======= -->
+  {{sidebar}}
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Depositar</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{URL}}">Painel</a></li>
+          <li class="breadcrumb-item"><a>Depositos</a></li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section profile">
+        <div class="row">
+          <div class="col-md-12">
+  
+            <div class="card">
+              <div class="card-body pt-3">
+                <!-- Bordered Tabs -->
+                <div class="tab-content pt-2">
+  
+                  <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                    <h5 class="card-title">Dados da Conta</h5>
+
+                    {{account}}
+
+                    <h5 class="card-title">Anexe o comprovativo de Deposito</h5>
+                    <form class="row g-3" method="POST" enctype="multipart/form-data">
+                        <input type="text" name="text_codigo_cliente" value="{{codigo_cliente}}" hidden>
+                        <input type="text" name="text_codigo_conta" value="{{codigo_conta}}" hidden>
+                        <input type="text" name="text_numero_conta" value="{{numero_conta}}" hidden>
+                        <div class="col-md-6">
+                            <label for="inputName5" class="form-label">Montante a Depositar</label>
+                            <input type="number" name="text_montante_deposito" class="form-control" id="inputName5">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputName5" class="form-label">Comprovativo</label>
+                            <input type="file" name="imagem" class="form-control" id="inputName5">
+                            <label for=""><small style="font-size: 11px; color: #6f6f6f;">Anexe um comprovativo (Ex: PDF, Imagem, Screenshot, etc)</small></label>
+                        </div>
+                        <div class="text-center" style="margin-top: 20px;">
+                            <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Submeter para aprovacao</button>
+                            <a href="{{URL}}/painel" type="reset" class="btn btn-secondary">Cancelar</a>
+                        </div>
+                    </form>
+                  </div>
+                </div><!-- End Bordered Tabs -->
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </section>
+
+  </main><!-- End #main -->
+  <!-- ======= Footer ======= -->
+   {{footer}}
+  <!-- End Footer -->
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script>
+        function setDataCorrente() {
+            const data = new Date();
+            const ano = data.getFullYear();
+            const mes = String(data.getMonth() + 1).padStart(2, '0'); 
+            const dia = String(data.getDate()).padStart(2, '0'); 
+            const dataFormatada = `${ano}-${mes}-${dia}`;
+
+            document.getElementById("dataCampo").value = dataFormatada;
+        }
+        window.onload = setDataCorrente;
+  </script>

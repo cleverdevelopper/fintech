@@ -1,0 +1,127 @@
+  <!-- ======= Header ======= -->
+  {{navbar}}
+  <!-- ======= Sidebar ======= -->
+  {{sidebar}}
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Cadastrar Grupo</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{URL}}">Painel</a></li>
+          <li class="breadcrumb-item"><a href="{{URL}}/groups">Grupos de Utilizador</a></li>
+          <li class="breadcrumb-item">Novo grupo</li>
+        </ol>
+      </nav>1
+    </div><!-- End Page Title -->
+    <!-- Multi Columns Form -->
+    <form  method="POST" >
+        <div class="card">
+            <div class="card-body">
+            <h5 class="card-title">Cadastrar novo Grupo</h5>
+                <div class="col-md-12">
+                <label for="inputName5" class="form-label">Nome Grupo</label>
+                <input type="text" name="text_group_name" class="form-control" id="inputName5" style="font-size: 14px; padding-top: 10px; padding-bottom: 10px;" placeholder="Digite o nome completo">
+                <label for=""><small style="font-size: 11px; color: #6f6f6f;">Digite o nome do Grupo (Ex: Colaboradores, Operadores. etc)</small></label>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="inputDate"  class="form-label">Descricao do grupo</label>
+                    <textarea type="date" name="text_descricao" class="form-control"style="font-size: 14px; padding-top: 10px; padding-bottom: 10px;"></textarea>
+                    <label for=""><small style="font-size: 11px; color: #6f6f6f;">Digite alguma descricao sobre o grupo</small></label>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Administracao</h5>
+                
+                <!-- Default Table -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Activo | Inativo
+                            </th>
+                            <th>Funcionalidade</th>
+                            <th>Descricao</th>
+                        </tr>
+                        </thead>
+                    <tbody>
+                        {{itemAdmin}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Operador</h5>
+                
+                <!-- Default Table -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Activo | Inativo
+                            </th>
+                            <th>Funcionalidade</th>
+                            <th>Descricao</th>
+                        </tr>
+                        </thead>
+                    <tbody>
+                        {{itemOperador}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Colaboradores</h5>
+                
+                <!-- Default Table -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Activo | Inativo
+                            </th>
+                            <th>Funcionalidade</th>
+                            <th>Descricao</th>
+                        </tr>
+                        </thead>
+                    <tbody>
+                        {{itemColaborador}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="text-center" style="margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Salvar</button>
+                    <a href="{{URL}}/groups" type="reset" class="btn btn-secondary">Cancelar</a>
+                </div>
+            
+            </div>
+        </div>
+    </form><!-- End Multi Columns Form -->
+
+  </main><!-- End #main -->
+  <!-- ======= Footer ======= -->
+   {{footer}}
+  <!-- End Footer -->
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script>
+        function setDataCorrente() {
+            const data = new Date();
+            const ano = data.getFullYear();
+            const mes = String(data.getMonth() + 1).padStart(2, '0'); 
+            const dia = String(data.getDate()).padStart(2, '0'); 
+            const dataFormatada = `${ano}-${mes}-${dia}`;
+
+            document.getElementById("dataCampo").value = dataFormatada;
+        }
+        window.onload = setDataCorrente;
+  </script>

@@ -1,0 +1,60 @@
+  <!-- ======= Header ======= -->
+  {{navbar}}
+
+  <!-- ======= Sidebar ======= -->
+  {{sidebar}}
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Grupo de Utilizador</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{URL}}">Painel</a></li>
+          <li class="breadcrumb-item">Grupos de Utilizador</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Grupo de Utilizador</h5>
+              <p>
+                <a href="{{URL}}/new-group" type="button" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Criar novo Grupo</a>
+              </p>
+              <!-- Table with stripped rows -->
+              <table class="table datatable">
+                <thead>
+                  <tr>
+                    <th>
+                      Codigo
+                    </th>
+                    <th>Nome do Grupo</th>
+                    <th>Descricao</th>
+                    <th>Estado</th>
+                    <th>Accoes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{items}}
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+  <!-- ======= Footer ======= -->
+   {{footer}}
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

@@ -15,19 +15,16 @@
 
 
         public static function getNavbar(){
-            return ViewManager::render('dashboard/navbar', [
+            return ViewManager::render('dashboard/common/navbar', [
                 'name'              => $_SESSION['admin']['utilizador']['nome_utilizador'],
-                'profile_pic'       => ''
+                'profile_pic'       => '',
+                'grupo'             => 'Administrador'
             ]);
         }
 
-        public static function getRightSidebar(){
-            return ViewManager::render('dashboard/menu/rightsidebar', [
-            ]);
-        }
         
         public static function getFooter(){
-            return ViewManager::render('dashboard/footer', []);
+            return ViewManager::render('dashboard/common/footer', []);
         }
 
 
@@ -36,33 +33,45 @@
         //===============================================
         private static function getAdminMenu(){
             $itens = '';
-            $itens .= ViewManager::render('dashboard/menu/administration/admin', []);   
+            $itens .= ViewManager::render('dashboard/common/menu/admin/admin', []);   
             return $itens;
         }
 
-        private static function getVisitsMenu(){
+        private static function getCollaboratorMenu(){
             $itens = '';
-            $itens .= ViewManager::render('dashboard/menu/visits/visits', []);   
+            $itens .= ViewManager::render('dashboard/common/menu/collab/collaborator', []);   
             return $itens;
         }
 
-        private static function getArsenal(){
+        private static function getLoan(){
             $itens = '';
-            $itens .= ViewManager::render('dashboard/menu/arsenal/arsenal', [
+            $itens .= ViewManager::render('dashboard/common/menu/loan/loan', [
+                //falta a verificacao do supervisor ou nao
+            ]);   
+            return $itens;
+        }
+
+        private static function getDeposit(){
+            $itens = '';
+            $itens .= ViewManager::render('dashboard/common/menu/deposit/deposit', [
                 //falta a verificacao do supervisor ou nao
             ]);   
             return $itens;
         }
 
 
+
         public static function getMenu(){
             if(Funcoes::Permition(0)){
-                return ViewManager::render('dashboard/menu/box', [
+                return ViewManager::render('dashboard/common/menu/sidebar', [
                     'admin'               => self::getAdminMenu(),
-                    'visits'              => self::getVisitsMenu(),
-                    'arsenal'             => self::getArsenal(),
+                    'collab'              => self::getCollaboratorMenu(),
+                    'loan'                => self::getLoan(),
+                    'deposit'             => self::getDeposit(),
                 ]);
-            }elseif(Funcoes::Permition(5)){
+            }
+            
+            /*elseif(Funcoes::Permition(5)){
                 return ViewManager::render('dashboard/menu/box', [
                     'admin'               => '',
                     'visits'              => self::getVisitsMenu(),
@@ -70,7 +79,7 @@
                 ]);
             }
 
-            /*if(Funcoes::Permition(0)){
+            if(Funcoes::Permition(0)){
                 return ViewManager::render('dashboard/menu/box', [
                     'administracao'     => self::getAdmin(),
                     'clinica'           => self::getClinica(),

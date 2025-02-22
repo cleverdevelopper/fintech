@@ -1,0 +1,57 @@
+  <!-- ======= Header ======= -->
+  {{navbar}}
+
+  <!-- ======= Sidebar ======= -->
+  {{sidebar}}
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Taxas de Juros</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{URL}}">Painel</a></li>
+          <li class="breadcrumb-item">Taxa de juros</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+
+    <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Cadastrar novo Juros</h5>
+
+          <!-- Multi Columns Form -->
+          <form class="row g-3" method="POST">
+            <div class="col-md-12">
+              <label for="inputName5" class="form-label">Descricao da Taxa</label>
+              <input type="text" name="text_interest_description" class="form-control" id="inputName5" style="font-size: 14px; padding-top: 10px; padding-bottom: 10px;" placeholder="Digite a descricao da Nova Taxa">
+              <label for=""><small style="font-size: 11px; color: #6f6f6f;">Ex: Quinzenal, Mensal, BiMensal</small></label>
+            </div>
+            <div class="col-md-6">
+              <label for="inputEmail5" class="form-label">Percentagem</label>
+              <input type="number" name="text_percentagem"  class="form-control" id="inputEmail5" style="font-size: 14px; padding-top: 10px; padding-bottom: 10px;" placeholder="Percentagem da taxa" >
+              <label for=""><small style="font-size: 11px; color: #6f6f6f;">Ex: 5, 10, 15</small></label>
+            </div>
+            <div class="col-md-6">
+                <label for="inputState" class="form-label">Estado</label>
+                <select id="inputState" class="form-select" name="text_estado">
+                  <option value="em operacao" selected>Em operacao</option>
+                  <option value="Fora de operacao">Fora de operacao</option>
+                </select>
+              </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Salvar</button>
+              <button type="reset" class="btn btn-secondary">Reset</button>
+            </div>
+          </form><!-- End Multi Columns Form -->
+
+        </div>
+      </div>
+
+  </main><!-- End #main -->
+  <!-- ======= Footer ======= -->
+   {{footer}}
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
