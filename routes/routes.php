@@ -14,6 +14,7 @@
     #===================================================
     #  Rotas relacionadas com API
     #===================================================
+    include __DIR__.'/api/v1/clientes.php';
     /*include __DIR__.'/api/v1/visits.php';
     include __DIR__.'/api/v1/funcionarios.php';
     include __DIR__.'/api/v1/armamento.php';

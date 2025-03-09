@@ -28,4 +28,22 @@
             return new Response(200, CollaboratorController::setNewCollabPage($request));
         }
     ]);
+
+    $objRouter->get('/search-collaborator', [
+        'middlewares'   => [
+            'requere-admin-login'
+        ],
+        function ($request){
+            return new Response(200, CollaboratorController::getListCollab($request));
+        }
+    ]);
+
+    $objRouter->post('/search-collaborator', [
+        'middlewares'   => [
+            'requere-admin-login'
+        ],
+        function ($request){
+            return new Response(200, CollaboratorController::setNewDepositPage($request));
+        }
+    ]);
 ?>

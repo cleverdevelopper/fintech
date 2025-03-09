@@ -47,16 +47,16 @@
         // Permissoes do Colaboradores
         //==========================================
         [
-            'permissao'         => 'Depositos',
-            'funcionalidade'    => 'Realizar um deposito'
+            'permissao'         => 'Movimentos',
+            'funcionalidade'    => 'Visualiza os seus movimentos'
         ], 
         [
-            'permissao'         => 'Emprestimos',
-            'funcionalidade'    => 'Solicitar um Emprestimo'
+            'permissao'         => 'Transferencias',
+            'funcionalidade'    => 'Realizar trasferencias'
         ],
         [
-            'permissao'         => 'Agendamentos',
-            'funcionalidade'    => 'Gestao e realizacao de Agendamentos'
+            'permissao'         => 'Emprestimos',
+            'funcionalidade'    => 'Pedido de Emorestimos'
         ],
 
 

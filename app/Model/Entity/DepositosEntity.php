@@ -3,48 +3,60 @@
     use App\DatabaseManager\Database;
 
     class DepositosEntity{
-        public $codigo_deposito;
+        public $codigo_movimento;
         public $codigo_cliente;
+        public $data;
+        public $data_valor;
+        public $referencia;
+        public $descricao;
         public $codigo_conta;
         public $numero_conta;
         public $montante;
-        public $talao_deposito; 
-        public $status; 
+        public $tipo_transacao; 
+        public $talao_transacao; 
         public $criado_em;
         public $atualizado_em; 
         public $apagado_em; 
     
         public  function cadastrar(){
-            $this->codigo_deposito = (new Database('depositos'))->insert([
+            $this->codigo_movimento = (new Database('movimentos'))->insert([
                 'codigo_cliente'            => $this->codigo_cliente,
+                'data'                      => $this->data,
+                'data_valor'                => $this->data_valor,
+                'referencia'                => $this->referencia,
+                'descricao'                 => $this->descricao,
                 'codigo_conta'              => $this->codigo_conta,
                 'numero_conta'              => $this->numero_conta,
                 'montante'                  => $this->montante,
-                'talao_deposito'            => $this->talao_deposito,
-                'status'                    => $this->status,
+                'tipo_transacao'            => $this->tipo_transacao,
+                'talao_transacao'           => $this->talao_transacao,
                 'criado_em'                 => $this->criado_em,
                 'atualizado_em'             => $this->atualizado_em,
                 'apagado_em'                => $this->apagado_em
             ]);
-            return $this->codigo_deposito;
+            return $this->codigo_movimento;
         }
 
         public static function getDepositos($where = null, $order = null, $limit = null, $fields = "*"){
-            return (new Database('depositos'))->select($where, $order, $limit, $fields);
+            return (new Database('movimentos'))->select($where, $order, $limit, $fields);
         }
 
         public static function getDepositosById($id){
-            return self::getDepositos('codigo_deposito = '.$id)->fetchObject(self::class);
+            return self::getDepositos('codigo_movimento = '.$id)->fetchObject(self::class);
         }
 
         public  function actualizar(){
-            return (new Database('depositos'))->update('codigo_deposito = '.$this->codigo_deposito, [
-                'codigo_cliente'            => $this->codigo_cliente,
+            return (new Database('movimentos'))->update('codigo_movimento = '.$this->codigo_movimento, [
+               'codigo_cliente'            => $this->codigo_cliente,
+                'data'                      => $this->data,
+                'data_valor'                => $this->data_valor,
+                'referencia'                => $this->referencia,
+                'descricao'                 => $this->descricao,
                 'codigo_conta'              => $this->codigo_conta,
                 'numero_conta'              => $this->numero_conta,
                 'montante'                  => $this->montante,
-                'talao_deposito'            => $this->talao_deposito,
-                'status'                    => $this->status,
+                'tipo_transacao'            => $this->tipo_transacao,
+                'talao_transacao'           => $this->talao_transacao,
                 'criado_em'                 => $this->criado_em,
                 'atualizado_em'             => $this->atualizado_em,
                 'apagado_em'                => $this->apagado_em

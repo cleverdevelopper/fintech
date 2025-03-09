@@ -12,8 +12,7 @@ use App\Utils\ViewManager;
         public static function setNewInterestPage($request){
             if(Funcoes::Permition(0)){
                 $postVars = $request->getPostVars();
-
-
+                
                 $objInterest = new InterestEntity;
                 $objInterest->tipo_emprestimo        = $postVars['text_interest_description'];
                 $objInterest->taxa_juros             = $postVars['text_percentagem'] / 100;

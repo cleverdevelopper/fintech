@@ -1,3 +1,30 @@
+  <style>
+    .suggestions-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        background-color: #fff;
+        border: 1px solid #ededed;
+        border-radius: 5px;
+        max-height: 150px;
+        overflow-y: hidden;
+        position: absolute;
+        width: calc(100% - 40px);
+        z-index: 999;
+    }
+
+    .suggestions-list li {
+        padding: 8px;
+        cursor: pointer;
+    }
+
+    .suggestions-list li:hover {
+        background-color: #f1f1f1;
+    }
+
+  </style>
+  
+  
   <!-- ======= Header ======= -->
   {{navbar}}
   <!-- ======= Sidebar ======= -->
@@ -18,6 +45,22 @@
     <section class="section profile">
         <div class="row">
           <div class="col-md-12">
+
+            <div class="card">
+              <div class="card-body pt-3">
+                <!-- Bordered Tabs -->
+                <div class="tab-content pt-2">
+  
+                  <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                    <div class="col-md-12">
+                      <label for="inputName5" class="form-label">Pesquisar Cliente</label>
+                      <input type="text" name="text_montante_deposito" class="form-control" id="inputName5" oninput="showSuggestions(this.value)">
+                      <ul id="suggestions-list" class="suggestions-list"></ul>
+                    </div>                  
+                  </div>
+                </div><!-- End Bordered Tabs -->
+              </div>
+            </div>
   
             <div class="card">
               <div class="card-body pt-3">
@@ -25,15 +68,43 @@
                 <div class="tab-content pt-2">
   
                   <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                    <h5 class="card-title">Dados da Conta</h5>
+                    <h5 class="card-title">Dados Pessoais</h5>
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">Nome Completo:</div>
+                      <div class="col-lg-9 col-md-8" id="nome-completo"></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">Tipo do Documento:</div>
+                      <div class="col-lg-9 col-md-8" id="tipo-documento"></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">Numero do Documento:</div>
+                      <div class="col-lg-9 col-md-8" id="doc-number"></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">Contacto:</div>
+                      <div class="col-lg-9 col-md-8" id="contacto"></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">Contacto Alternativo:</div>
+                      <div class="col-lg-9 col-md-8" id="contacto-alt"></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">Endereco:</div>
+                      <div class="col-lg-9 col-md-8" id="endereco"></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">Email:</div>
+                      <div class="col-lg-9 col-md-8" id="email"></div>
+                    </div>
 
-                    {{account}}
+
+
 
                     <h5 class="card-title">Anexe o comprovativo de Deposito</h5>
                     <form class="row g-3" method="POST" enctype="multipart/form-data">
-                        <input type="text" name="text_codigo_cliente" value="{{codigo_cliente}}" hidden>
-                        <input type="text" name="text_codigo_conta" value="{{codigo_conta}}" hidden>
-                        <input type="text" name="text_numero_conta" value="{{numero_conta}}" hidden>
+
+                        <input type="text" name="text_codigo_cliente" id="codigo_cliente" hidden>
                         <div class="col-md-6">
                             <label for="inputName5" class="form-label">Montante a Depositar</label>
                             <input type="number" name="text_montante_deposito" class="form-control" id="inputName5">
@@ -75,3 +146,57 @@
         }
         window.onload = setDataCorrente;
   </script>
+
+<script>
+  function showSuggestions(query) {
+    const suggestionsList = document.getElementById("suggestions-list");
+    suggestionsList.innerHTML = '';  // Limpa as sugestões anteriores
+
+    if (query.length === 0) {
+        return; // Se o campo de pesquisa estiver vazio, não exibe sugestões
+    }
+
+    // Exemplo de requisição para a API usando fetch
+    fetch("http://127.0.0.1:8888/fintech/api/clientes?search=" + query)
+        .then(response => response.json())
+        .then(data => {
+            console.log('Dados recebidos da API:', data);  // Para depuração
+
+            if (data && data.length > 0) {
+                data.forEach(client => {
+                    const li = document.createElement("li");
+                    li.textContent = client.name;
+
+                    li.onclick = function () {
+                        
+                        // Preencher os campos com os dados do cliente
+                        document.getElementById("inputName5").value = client.name;
+                        document.getElementById("nome-completo").textContent = client.name;
+                        document.getElementById("tipo-documento").textContent = client.tipo_doc;
+                        document.getElementById("doc-number").textContent = client.documento;
+                        document.getElementById("contacto").textContent = client.celular;
+                        document.getElementById("contacto-alt").textContent = client.celular_alt;
+                        document.getElementById("endereco").textContent = client.endereco;
+                        document.getElementById("email").textContent = client.email;
+
+                        // Preencher o campo hidden
+                        document.getElementById("codigo_cliente").value = client.id; 
+
+                        suggestionsList.innerHTML = ''; // Limpa as sugestões
+                    };
+
+                    suggestionsList.appendChild(li);
+                });
+            } else {
+                const li = document.createElement("li");
+                li.textContent = "Nenhum cliente encontrado";
+                suggestionsList.appendChild(li);
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados da API:', error);
+        });
+}
+
+</script>
+

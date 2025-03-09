@@ -1,6 +1,8 @@
 <?php
     namespace App\Controller\Dashboard;;
-    use App\Utils\ViewManager;
+
+use App\Controller\Alert;
+use App\Utils\ViewManager;
     use App\Model\Entity\GroupEntity as EntityGrupos;
     //use App\Controller\Dashboard\ErrorController;
     use App\Controller\PageController;
@@ -216,6 +218,22 @@
         } */
         
 
+        private static function getStatus($request){
+            $queryParams = $request->getQueryParams();
+            
+            if(!isset($queryParams['status'])) return '';
+
+            switch($queryParams['status']){ 
+                case 'created':
+                    return Alert::getSuccess('O grupo foi criado com sucesso.');
+                    break;
+                case 'updated':
+                    return Alert::getSuccess('O grupo foi actualizado com sucesso.');
+                    break;
+            }
+        } 
+
+
 
         #=========================================================
         # Busca a pagina inicial dos Grupos
@@ -241,7 +259,8 @@
                     'navbar'        => parent::getNavbar(),
                     'sidebar'       => parent::getMenu(),
                     'footer'        => parent::getFooter(),
-                    'items'          => self::getGrupoItens()
+                    'items'         => self::getGrupoItens(),
+                    'status'        => self::getStatus($request)
                 ]);
 
                 return parent::getPage('FINTECH | Grupos', $content);

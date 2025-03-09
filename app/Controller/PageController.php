@@ -51,14 +51,38 @@
             return $itens;
         }
 
-        private static function getDeposit(){
+        private static function getDeposit($menu){
             $itens = '';
             $itens .= ViewManager::render('dashboard/common/menu/deposit/deposit', [
+                'menu'      => $menu
+            ]);   
+            return $itens;
+        }
+
+        private static function getTransfer(){
+            $itens = '';
+            $itens .= ViewManager::render('dashboard/common/menu/transfer/transfer', [
                 //falta a verificacao do supervisor ou nao
             ]);   
             return $itens;
         }
 
+
+        private static function getWithdraw(){
+            $itens = '';
+            $itens .= ViewManager::render('dashboard/common/menu/withdraw/withdraw', [
+                //falta a verificacao do supervisor ou nao
+            ]);   
+            return $itens;
+        }
+
+        private static function getReports(){
+            $itens = '';
+            $itens .= ViewManager::render('dashboard/common/menu/reports/reports', [
+                //falta a verificacao do supervisor ou nao
+            ]);   
+            return $itens;
+        }
 
 
         public static function getMenu(){
@@ -67,19 +91,24 @@
                     'admin'               => self::getAdminMenu(),
                     'collab'              => self::getCollaboratorMenu(),
                     'loan'                => self::getLoan(),
-                    'deposit'             => self::getDeposit(),
+                    'deposit'             => '',
+                    'withdraw'            => self::getWithdraw(),
+                    'transfer'            => self::getTransfer(),
+                    'reports'             => self::getReports()
                 ]);
-            }
-            
-            /*elseif(Funcoes::Permition(5)){
-                return ViewManager::render('dashboard/menu/box', [
+            }elseif(Funcoes::Permition(8)){
+                return ViewManager::render('dashboard/common/menu/sidebar', [
                     'admin'               => '',
-                    'visits'              => self::getVisitsMenu(),
-                    'arsenal'             => '',
+                    'collab'              => '',
+                    'loan'                => self::getLoan(),
+                    'deposit'             => self::getDeposit('Meus Movimentos'),
+                    'withdraw'            => self::getWithdraw(),
+                    'transfer'            => self::getTransfer(),
+                    'reports'             => ''
                 ]);
             }
 
-            if(Funcoes::Permition(0)){
+            /*if(Funcoes::Permition(0)){
                 return ViewManager::render('dashboard/menu/box', [
                     'administracao'     => self::getAdmin(),
                     'clinica'           => self::getClinica(),

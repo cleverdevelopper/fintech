@@ -2,7 +2,7 @@
     use App\Http\Response;
     use App\Controller\Dashboard\DepositoController;
 
-    $objRouter->get('/deposit', [
+    $objRouter->get('/deposits', [
         'middlewares'   => [
             'requere-admin-login'
         ],
@@ -28,4 +28,5 @@
             return new Response(200, DepositoController::setNewDepositPage($request));
         }
     ]);
+
 ?>

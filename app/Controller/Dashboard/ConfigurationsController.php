@@ -192,7 +192,6 @@
                 case 'updated_telegram':
                     return Alert::getSuccess('O Telegram de configuracao actualizado com sucesso.');
                     break;
-                    
             }
         } 
 

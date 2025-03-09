@@ -28,7 +28,10 @@
                 return self::getLoginPage($request, 'Dados de login invalidos.' );
             }
 
+            
+
             if(md5($password) != $objUtilizador->palavra_passe){
+
                 return self::getLoginPage($request, 'Dados de login invalidos.' );
             }
 

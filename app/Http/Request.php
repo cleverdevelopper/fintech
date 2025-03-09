@@ -32,11 +32,25 @@
 
                 $time = time();
                 $new_image_name = $time.$img_name;
-                move_uploaded_file($tmp_name, "depositos/".$new_image_name);
+                move_uploaded_file($tmp_name, "images/depositos/".$new_image_name);
 
                 $this->file = $new_image_name;
                 $this->postVars        = $_POST ?? [];
-            }else{
+            }elseif(isset($_FILES['file_documento'])){
+                #=========================================================
+                # Condicao responsavel por guardar as assinaturas
+                #=========================================================
+                $img_name = $_FILES['file_documento']['name'];
+                $tmp_name = $_FILES['file_documento']['tmp_name'];
+
+                $time = time();
+                $new_image_name = $time.$img_name;
+                move_uploaded_file($tmp_name, "images/documentos/".$new_image_name);
+
+                $this->file = $new_image_name;
+                $this->postVars        = $_POST ?? [];
+
+            } else{
                 $this->postVars        = $_POST ?? [];
             }
 

@@ -9,19 +9,23 @@
         public $genero;
         public $tipo_documento;
         public $documento_identidade; 
+        public $local_de_emissao;
+        public $data_emissao;
+        public $data_expiracao;
+        public $distrito_residencia;
+        public $cidade_residencia;
         public $endereco; 
         public $celular; 
         public $celular_alt; 
         public $email;
         public $palavra_passe;  
         public $data_admissao; 
+        public $anexo_documento; 
         public $criado_em;
         public $atualizado_em; 
         public $apagado_em; 
         public $grupos; 
-    
-        
-        
+ 
         public  function cadastrar(){
             $this->codigo_cliente = (new Database('clientes'))->insert([
                 'nome_completo'             => $this->nome_completo,
@@ -29,6 +33,11 @@
                 'genero'                    => $this->genero,
                 'tipo_documento'            => $this->tipo_documento,
                 'documento_identidade'      => $this->documento_identidade,
+                'local_de_emissao'          => $this->local_de_emissao,
+                'data_emissao'              => $this->data_emissao,
+                'data_expiracao'            => $this->data_expiracao,
+                'distrito_residencia'       => $this->distrito_residencia,
+                'cidade_residencia'         => $this->cidade_residencia,
                 'endereco'                  => $this->endereco,
                 'celular'                   => $this->celular,
                 'celular_alt'               => $this->celular_alt,
@@ -58,6 +67,11 @@
                 'genero'                    => $this->genero,
                 'tipo_documento'            => $this->tipo_documento,
                 'documento_identidade'      => $this->documento_identidade,
+                'local_de_emissao'          => $this->local_de_emissao,
+                'data_emissao'              => $this->data_emissao,
+                'data_expiracao'            => $this->data_expiracao,
+                'distrito_residencia'       => $this->distrito_residencia,
+                'cidade_residencia'         => $this->cidade_residencia,
                 'endereco'                  => $this->endereco,
                 'celular'                   => $this->celular,
                 'celular_alt'               => $this->celular_alt,

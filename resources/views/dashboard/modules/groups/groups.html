@@ -23,9 +23,11 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Grupo de Utilizador</h5>
-              <p>
-                <a href="{{URL}}/new-group" type="button" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Criar novo Grupo</a>
-              </p>
+              <div class="" style=" width: 100%; display: flex; justify-content: flex-end;">
+                <p>
+                  <a href="{{URL}}/new-group" type="button" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Cadastrar</a>
+                </p>
+              </div>
               <!-- Table with stripped rows -->
               <table class="table datatable">
                 <thead>
@@ -36,7 +38,7 @@
                     <th>Nome do Grupo</th>
                     <th>Descricao</th>
                     <th>Estado</th>
-                    <th>Accoes</th>
+                    <th>Ações</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -56,5 +58,7 @@
   <!-- ======= Footer ======= -->
    {{footer}}
   <!-- End Footer -->
+
+  {{status}}
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
