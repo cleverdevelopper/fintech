@@ -9,6 +9,11 @@
                 'autor'     => 'cleverdeveloper',
             ];
         }
+
+        public static function formatarNumero($numero) {
+            // Formata o número com separador de milhar (.) e separador decimal (,)
+            return number_format($numero, 2, ',', '.');
+        }
     }
 
 ?>

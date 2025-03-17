@@ -1,0 +1,377 @@
+<!--<script>
+    document.getElementById("search-form").addEventListener("submit", function(event) {
+    event.preventDefault();  // Previne o envio do formulário e recarregamento da página
+    const query = document.getElementById("text_client_search").value.toLowerCase();  // Obtém o valor da pesquisa e coloca em minúsculo
+    showSuggestions(query);
+});
+
+function showSuggestions(query) {
+    const suggestionsList = document.getElementById("clients-table-body");
+    suggestionsList.innerHTML = '';  // Limpa a tabela antes de mostrar os novos resultados
+
+    if (query.length === 0) {
+        return;  // Se o campo de pesquisa estiver vazio, não exibe sugestões
+    }
+
+    // Exemplo de requisição para a API usando fetch
+    fetch("http://127.0.0.1:8888/fintech/api/clientes?search=" + query)
+        .then(response => response.json())
+        .then(data => {
+            console.log('Dados recebidos da API:', data);  // Para depuração
+
+            // Filtra os dados recebidos para que apenas clientes com o nome correspondente à busca sejam exibidos
+            const filteredClients = data.filter(client => 
+                client.name.toLowerCase().includes(query)  // Compara nome (ignorando maiúsculas/minúsculas)
+            );
+
+            if (filteredClients.length > 0) {
+                filteredClients.forEach(client => {
+                    const tr = document.createElement("tr");
+
+                    tr.innerHTML = `
+                        <th scope="row">#${client.id}</th>
+                        <td>${client.numero_conta}</td>
+                        <td>${client.name}</td>
+                        <td><a href="#" class="text-primary">${client.celular}</a></td>
+                        <td><span class="badge bg-success">${client.estado}</span></td>
+                        <td>${client.saldo}</td>
+
+                    `;
+
+                    // Tornar a linha clicável
+                    tr.style.cursor = 'pointer';  // Indica que a linha é clicável
+                    tr.style.transition = 'background-color 0.3s';  // Adiciona uma transição suave para a cor de fundo
+                    tr.onclick = function() {
+                        // Preenche o modal com as informações do cliente
+                        document.getElementById("nome-completo").textContent = client.name;
+                        document.getElementById("tipo-documento").textContent = client.tipo_doc;
+                        document.getElementById("doc-number").textContent = client.documento;
+                        document.getElementById("contacto").textContent = client.celular;
+                        document.getElementById("contacto-alt").textContent = client.celular_alt;
+                        document.getElementById("endereco").textContent = client.endereco;
+                        document.getElementById("email").textContent = client.email;
+                        document.getElementById("numero_conta").textContent = client.numero_conta;
+                        document.getElementById("saldo").textContent = client.saldo +' MZN';
+                        
+                        
+                        // Preenche os campos hidden
+                        document.getElementById("hidden_codigo_conta").value = client.codigo_conta;  // Preenche o código da conta
+                        document.getElementById("hidden_numero_conta").value = client.numero_conta;  // Preenche o número da conta
+                        document.getElementById("hidden_codigo_cliente").value = client.id;  // Preenche o código do cliente
+
+                        // Abre o modal
+                        var myModal = new bootstrap.Modal(document.getElementById('clientModal'));
+                        myModal.show();
+                    };
+
+                    suggestionsList.appendChild(tr);
+                });
+            } else {
+                const tr = document.createElement("tr");
+                tr.innerHTML = '<td colspan="6" class="text-center">Nenhum cliente encontrado</td>';
+                suggestionsList.appendChild(tr);
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados da API:', error);
+        });
+}
+
+</script>-->
+
+<!--
+<script>
+    document.getElementById("search-form").addEventListener("submit", function(event) {
+        event.preventDefault();  // Previne o envio do formulário e recarregamento da página
+        const query = document.getElementById("text_client_search").value.toLowerCase();  // Obtém o valor da pesquisa e coloca em minúsculo
+        showSuggestions(query);
+    });
+
+    function showSuggestions(query) {
+        const suggestionsList = document.getElementById("clients-table-body");
+        suggestionsList.innerHTML = '';  // Limpa a tabela antes de mostrar os novos resultados
+
+        if (query.length === 0) {
+            return;  // Se o campo de pesquisa estiver vazio, não exibe sugestões
+        }
+
+        // Exemplo de requisição para a API usando fetch
+        fetch("http://127.0.0.1:8888/fintech/api/clientes?search=" + query)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dados recebidos da API:', data);  // Para depuração
+
+                // Filtra os dados recebidos para que apenas clientes com o nome correspondente à busca sejam exibidos
+                const filteredClients = data.filter(client => 
+                    client.name.toLowerCase().includes(query)  // Compara nome (ignorando maiúsculas/minúsculas)
+                );
+
+                if (filteredClients.length > 0) {
+                    filteredClients.forEach(client => {
+                        const tr = document.createElement("tr");
+
+                        tr.innerHTML = `
+                            <th scope="row">#${client.id}</th>
+                            <td>${client.numero_conta}</td>
+                            <td>${client.name}</td>
+                            <td><a href="#" class="text-primary">${client.celular}</a></td>
+                            <td><span class="badge bg-success">${client.estado}</span></td>
+                            <td>${client.saldo}</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" style="font-size: 13px;" class="btn btn-info btn-sm dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-info-circle" style="font-size: 11px; padding-right: 3px"></i> Acções</button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <li><a class="dropdown-item" href="#" onclick="abrirModalDepositar(${JSON.stringify(client)})">Depositar</a></li>
+                                        <li><a class="dropdown-item" href="#">Editar</a></li>
+                                        <li><a class="dropdown-item" href="#">Revogar</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        `;
+
+                        suggestionsList.appendChild(tr);
+                    });
+                } else {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = '<td colspan="7" class="text-center">Nenhum cliente encontrado</td>';
+                    suggestionsList.appendChild(tr);
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao buscar dados da API:', error);
+            });
+    }
+
+    // Função para abrir o modal de depósito
+    function abrirModalDepositar(client) {
+    // Preenche o modal com as informações do cliente
+      document.getElementById("nome-completo").textContent = client.name;
+      document.getElementById("tipo-documento").textContent = client.tipo_doc;
+      document.getElementById("doc-number").textContent = client.documento;
+      document.getElementById("contacto").textContent = client.celular;
+      document.getElementById("contacto-alt").textContent = client.celular_alt;
+      document.getElementById("endereco").textContent = client.endereco;
+      document.getElementById("email").textContent = client.email;
+      document.getElementById("numero_conta").textContent = client.numero_conta;
+      document.getElementById("saldo").textContent = client.saldo + ' MZN';
+
+      // Preenche os campos hidden
+      document.getElementById("hidden_codigo_conta").value = client.codigo_conta;  // Preenche o código da conta
+      document.getElementById("hidden_numero_conta").value = client.numero_conta  // Preenche o número da conta
+      document.getElementById("hidden_codigo_cliente").value = client.id;  // Preenche o código do cliente
+
+      // Abre o modal de depósito
+      var myModal = new bootstrap.Modal(document.getElementById('clientModal'));
+      myModal.show();  // Mostrar o modal
+  }
+
+</script>-->
+
+
+
+<!--<script>
+  document.getElementById("search-form").addEventListener("submit", function(event) {
+      event.preventDefault();  // Previne o envio do formulário e recarregamento da página
+      const query = document.getElementById("text_client_search").value.toLowerCase();  // Obtém o valor da pesquisa e coloca em minúsculo
+      showSuggestions(query);
+  });
+
+  function showSuggestions(query) {
+      const suggestionsList = document.getElementById("clients-table-body");
+      suggestionsList.innerHTML = '';  // Limpa a tabela antes de mostrar os novos resultados
+
+      if (query.length === 0) {
+          return;  // Se o campo de pesquisa estiver vazio, não exibe sugestões
+      }
+
+      // Exemplo de requisição para a API usando fetch
+      fetch("http://127.0.0.1:8888/fintech/api/clientes?search=" + query)
+          .then(response => response.json())
+          .then(data => {
+              console.log('Dados recebidos da API:', data);  // Para depuração
+
+              // Filtra os dados recebidos para que apenas clientes com o nome correspondente à busca sejam exibidos
+              const filteredClients = data.filter(client => 
+                  client.name.toLowerCase().includes(query)  // Compara nome (ignorando maiúsculas/minúsculas)
+              );
+
+              if (filteredClients.length > 0) {
+                  filteredClients.forEach(client => {
+                      const tr = document.createElement("tr");
+
+                      tr.innerHTML = `
+                          <th scope="row">#${client.id}</th>
+                          <td>${client.numero_conta}</td>
+                          <td>${client.name}</td>
+                          <td><a href="#" class="text-primary">${client.celular}</a></td>
+                          <td><span class="badge bg-success">${client.estado}</span></td>
+                          <td>${client.saldo}</td>
+                          <td>
+                             
+                              <div class="dropdown">
+                                  <button type="button" style="font-size: 13px;" class="btn btn-info btn-sm dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-info-circle" style="font-size: 11px; padding-right: 3px"></i> Acções</button>
+                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <li><a class="dropdown-item" href="#" onclick="abrirModalDepositar(${JSON.stringify(client)})">Depositar</a></li>
+                                      <li><a class="dropdown-item" href="#">Editar</a></li>
+                                      <li><a class="dropdown-item" href="#">Revogar</a></li>
+                                  </ul>
+                              </div>
+                          </td>
+                      `;
+
+                      suggestionsList.appendChild(tr);
+                  });
+              } else {
+                  const tr = document.createElement("tr");
+                  tr.innerHTML = '<td colspan="7" class="text-center">Nenhum cliente encontrado</td>';
+                  suggestionsList.appendChild(tr);
+              }
+          })
+          .catch(error => {
+              console.error('Erro ao buscar dados da API:', error);
+          });
+  }
+
+  // Função para abrir o modal de depósito
+  function abrirModalDepositar(client) {
+
+      console.log(client);
+      // Preenche o modal com as informações do cliente
+      document.getElementById("nome-completo").textContent = client.name;
+      document.getElementById("tipo-documento").textContent = client.tipo_doc;
+      document.getElementById("doc-number").textContent = client.documento;
+      document.getElementById("contacto").textContent = client.celular;
+      document.getElementById("contacto-alt").textContent = client.celular_alt;
+      document.getElementById("endereco").textContent = client.endereco;
+      document.getElementById("email").textContent = client.email;
+      document.getElementById("numero_conta").textContent = client.numero_conta;
+      document.getElementById("saldo").textContent = client.saldo + ' MZN';
+
+      // Preenche os campos hidden
+      document.getElementById("hidden_codigo_conta").value = client.codigo_conta;  // Preenche o código da conta
+      document.getElementById("hidden_numero_conta").value = client.numero_conta  // Preenche o número da conta
+      document.getElementById("hidden_codigo_cliente").value = client.id;  // Preenche o código do cliente
+
+      // Abre o modal de depósito
+      var myModal = new bootstrap.Modal(document.getElementById('clientModal'));
+      myModal.show();  // Mostrar o modal
+  }
+</script>-->
+
+
+
+<!--
+<script>
+  document.getElementById("search-form").addEventListener("submit", function(event) {
+      console.log('Form submitted');
+      event.preventDefault();  // Previne o envio do formulário e recarregamento da página
+      const query = document.getElementById("text_client_search").value.toLowerCase();  // Obtém o valor da pesquisa e coloca em minúsculo
+      console.log('Search query:', query);
+      showSuggestions(query);
+  });
+
+  function showSuggestions(query) {
+      const suggestionsList = document.getElementById("clients-table-body");
+      suggestionsList.innerHTML = '';  // Limpa a tabela antes de mostrar os novos resultados
+
+      if (query.length === 0) {
+          return;  // Se o campo de pesquisa estiver vazio, não exibe sugestões
+      }
+
+      // Exemplo de requisição para a API usando fetch
+      fetch("http://127.0.0.1:8888/fintech/api/clientes?search=" + query)
+          .then(response => response.json())
+          .then(data => {
+              console.log('Dados recebidos da API:', data);  // Para depuração
+
+              // Filtra os dados recebidos para que apenas clientes com o nome correspondente à busca sejam exibidos
+              const filteredClients = data.filter(client => 
+                  client.name.toLowerCase().includes(query)  // Compara nome (ignorando maiúsculas/minúsculas)
+              );
+
+              if (filteredClients.length > 0) {
+                  filteredClients.forEach(client => {
+                      const tr = document.createElement("tr");
+
+                      tr.innerHTML = `
+                          <th scope="row">#${client.id}</th>
+                          <td>${client.numero_conta}</td>
+                          <td>${client.name}</td>
+                          <td><a href="#" class="text-primary">${client.celular}</a></td>
+                          <td><span class="badge bg-success">${client.estado}</span></td>
+                          <td>${client.saldo}</td>
+                          <td>
+                             
+                              <div class="dropdown">
+                                  <button type="button" style="font-size: 13px;" class="btn btn-info btn-sm dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-info-circle" style="font-size: 11px; padding-right: 3px"></i> Acções</button>
+                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <li><a class="dropdown-item" href="#" onclick="abrirModalDepositar(${client.name})">Depositar</a></li>
+                                      <li><a class="dropdown-item" href="#">Editar</a></li>
+                                      <li><a class="dropdown-item" href="#">Revogar</a></li>
+                                  </ul>
+                              </div>
+                          </td>
+                      `;
+
+                      suggestionsList.appendChild(tr);
+                  });
+              } else {
+                  const tr = document.createElement("tr");
+                  tr.innerHTML = '<td colspan="7" class="text-center">Nenhum cliente encontrado</td>';
+                  suggestionsList.appendChild(tr);
+              }
+          })
+          .catch(error => {
+              console.error('Erro ao buscar dados da API:', error);
+          });
+  }
+
+  // Função para abrir o modal de depósito
+  function abrirModalDepositar(client) {
+      //console.log('Opening deposit modal for client:', client);
+      // Preenche o modal com as informações do cliente
+      //document.getElementById("nome-completo").textContent = client.name;
+      //document.getElementById("tipo-documento").textContent = client.tipo_doc;
+      //document.getElementById("doc-number").textContent = client.documento;
+      //document.getElementById("contacto").textContent = client.celular;
+      //document.getElementById("contacto-alt").textContent = client.celular_alt;
+      //document.getElementById("endereco").textContent = client.endereco;
+      //document.getElementById("email").textContent = client.email;
+      //document.getElementById("numero_conta").textContent = client.numero_conta;
+      //document.getElementById("saldo").textContent = client.saldo + ' MZN';
+
+      // Preenche os campos hidden
+      //document.getElementById("hidden_codigo_conta").value = client.codigo_conta;  // Preenche o código da conta
+      //document.getElementById("hidden_numero_conta").value = client.numero_conta  // Preenche o número da conta
+      //document.getElementById("hidden_codigo_cliente").value = client.id;  // Preenche o código do cliente
+
+      // Abre o modal de depósito
+      var myModal = new bootstrap.Modal(document.getElementById('clientModal'));
+      myModal.show();  // Mostrar o modal
+  }
+</script>-->
+
+
+
+function abrirModalDepositar(clientJson) {
+    const client = JSON.parse(clientJson);
+    console.log(client);
+    console.log(JSON.stringify(client, null, 2)); 
+    document.getElementById("nome-completo").textContent = client.name;
+    document.getElementById("tipo-documento").textContent = client.tipo_doc;
+    document.getElementById("doc-number").textContent = client.documento;
+    document.getElementById("contacto").textContent = client.celular;
+    document.getElementById("contacto-alt").textContent = client.celular_alt;
+    document.getElementById("endereco").textContent = client.endereco;
+    document.getElementById("email").textContent = client.email;
+    document.getElementById("numero_conta").textContent = client.numero_conta;
+    document.getElementById("saldo").textContent = client.saldo + ' MZN';
+
+    document.getElementById("hidden_codigo_conta").value = client.codigo_conta;
+    document.getElementById("hidden_numero_conta").value = client.numero_conta;
+    document.getElementById("hidden_codigo_cliente").value = client.id;
+
+    // Abre o modal
+    var myModal = new bootstrap.Modal(document.getElementById('clientModal'));
+    myModal.show();  // Mostrar o modal
+}

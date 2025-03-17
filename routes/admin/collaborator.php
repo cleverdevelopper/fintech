@@ -1,6 +1,7 @@
 <?php
     use App\Http\Response;
     use App\Controller\Dashboard\CollaboratorController;
+use App\Controller\Dashboard\DepositoController;
 
     $objRouter->get('/collaborator', [
         'middlewares'   => [
@@ -43,7 +44,7 @@
             'requere-admin-login'
         ],
         function ($request){
-            return new Response(200, CollaboratorController::setNewDepositPage($request));
+            return new Response(200, DepositoController::setNewDepositPage($request));
         }
     ]);
 ?>

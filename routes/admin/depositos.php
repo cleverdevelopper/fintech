@@ -11,16 +11,7 @@
         }
     ]);
 
-    $objRouter->get('/new-deposit', [
-        'middlewares'   => [
-            'requere-admin-login'
-        ],
-        function ($request){
-            return new Response(200, DepositoController::getNewDeposito($request));
-        }
-    ]);
-
-    $objRouter->post('/new-deposit', [
+    $objRouter->post('/deposits', [
         'middlewares'   => [
             'requere-admin-login'
         ],
@@ -28,5 +19,4 @@
             return new Response(200, DepositoController::setNewDepositPage($request));
         }
     ]);
-
 ?>

@@ -59,6 +59,14 @@
             return $itens;
         }
 
+        private static function getRequests(){
+            $itens = '';
+            $itens .= ViewManager::render('dashboard/common/menu/requests/requests', [
+                
+            ]);   
+            return $itens;
+        }
+
         private static function getTransfer(){
             $itens = '';
             $itens .= ViewManager::render('dashboard/common/menu/transfer/transfer', [
@@ -94,17 +102,19 @@
                     'deposit'             => '',
                     'withdraw'            => self::getWithdraw(),
                     'transfer'            => self::getTransfer(),
-                    'reports'             => self::getReports()
+                    'reports'             => self::getReports(),
+                    'requests'            => self::getRequests()
                 ]);
             }elseif(Funcoes::Permition(8)){
                 return ViewManager::render('dashboard/common/menu/sidebar', [
                     'admin'               => '',
                     'collab'              => '',
                     'loan'                => self::getLoan(),
-                    'deposit'             => self::getDeposit('Meus Movimentos'),
+                    'deposit'             => self::getDeposit('Movimentos'),
                     'withdraw'            => self::getWithdraw(),
                     'transfer'            => self::getTransfer(),
-                    'reports'             => ''
+                    'reports'             => '',
+                    'requests'            => ''
                 ]);
             }
 
@@ -174,6 +184,21 @@
         #==========================================================================
         # Fim das funcoes que lidam com as formatacoes das datas
         #==========================================================================
+
+
+        #=====================================================
+        # Formatacao dos valores
+        #======================================================
+
+        public static function formatarNumero($numero) {
+            // Verifica se o número é nulo ou não é um número válido
+            if ($numero == null) {
+                return '0,00'; // Retorna o valor "0,00" caso o saldo seja null
+            }
+            // Formata o número com separador de milhar (.) e separador decimal (,)
+            return number_format($numero, 2, ',', '.');
+        }
+
 
     }
 ?>

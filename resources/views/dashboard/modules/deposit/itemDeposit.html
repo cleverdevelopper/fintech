@@ -1,10 +1,11 @@
 <tr>
-    <th scope="row"><a href="#">#{{data}}</a></th>
-    <td>{{data_valor}}</td>
-    <td>{{referencia}}</td>
-    <td>{{descricao}}</td>
-    <td><span class="badge {{cor}}">{{estado}}</span></td>
-    <td>MZN {{montante}}</td>
-    <th scope="row">
-      <a href="http://"><i class="bi bi-filetype-pdf"></i></a></th>
-  </tr>
+  <th scope="row"><a href="#">{{data}}</a></th>
+  <td>{{data_valor}}</td>
+  <td>{{referencia}}</td>
+  <td>{{tipo}}</td>
+  <td><span class="badge {{cor}}">{{status}}</span></td>
+  <td style="text-align: right;">
+    <span class="badge {{border}} border-1 {{text}}" style="font-size: 14px;">{{icon}} {{montante}}</span>
+  </td>
+  <td>Accoes</td>
+</tr>

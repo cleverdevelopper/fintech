@@ -1,64 +1,86 @@
-  <!-- ======= Header ======= -->
-  {{navbar}}
+<!-- ======= Header ======= -->
+{{navbar}}
 
-  <!-- ======= Sidebar ======= -->
-  {{sidebar}}
+<!-- ======= Sidebar ======= -->
+{{sidebar}}
 
-  <main id="main" class="main">
+<main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>Grupo de Utilizador</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{URL}}">Painel</a></li>
-          <li class="breadcrumb-item">Grupos de Utilizador</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+  <div class="pagetitle">
+    <h1>Grupo de Utilizador</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{URL}}">Painel</a></li>
+        <li class="breadcrumb-item">Administração</li>
+        <li class="breadcrumb-item active">Grupos de Utilizador</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
 
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
+  <section class="section dashboard">
+    <div class="row">
 
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Grupo de Utilizador</h5>
-              <div class="" style=" width: 100%; display: flex; justify-content: flex-end;">
-                <p>
-                  <a href="{{URL}}/new-group" type="button" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Cadastrar</a>
-                </p>
+      <!-- Left side columns -->
+      <div class="col-lg-12">
+        <div class="row">
+          <!-- Recent Sales -->
+          <div class="col-12">
+            <div class="card recent-sales overflow-auto">
+
+              <div class="filter">
+                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                  <li class="dropdown-header text-start">
+                    <h6>Filter</h6>
+                  </li>
+
+                  <li><a class="dropdown-item" href="#">Today</a></li>
+                  <li><a class="dropdown-item" href="#">This Month</a></li>
+                  <li><a class="dropdown-item" href="#">This Year</a></li>
+                </ul>
               </div>
-              <!-- Table with stripped rows -->
-              <table class="table datatable">
-                <thead>
-                  <tr>
-                    <th>
-                      Codigo
-                    </th>
-                    <th>Nome do Grupo</th>
-                    <th>Descricao</th>
-                    <th>Estado</th>
-                    <th>Ações</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {{items}}
-                </tbody>
-              </table>
-              <!-- End Table with stripped rows -->
+
+              <div class="card-body">
+                <h5 class="card-title">Grupo de Utilizador</h5>
+                <div class="" style=" width: 100%; display: flex; justify-content: flex-end;">
+                  <p>
+                    <a href="{{URL}}/new-group" type="button" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Cadastrar</a>
+                  </p>
+                </div>
+                <table class="table table-borderless datatable">
+                  <thead>
+                    <tr>
+                      <th>
+                        Codigo
+                      </th>
+                      <th>Nome do Grupo</th>
+                      <th>Descricao</th>
+                      <th>Estado</th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{items}}
+                  </tbody>
+                </table>
+
+              </div>
 
             </div>
-          </div>
-
+          </div><!-- End Recent Sales -->
         </div>
-      </div>
-    </section>
+      </div><!-- End Left side columns -->
 
-  </main><!-- End #main -->
-  <!-- ======= Footer ======= -->
-   {{footer}}
-  <!-- End Footer -->
+    </div>
+  </section>
 
-  {{status}}
+</main><!-- End #main -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<!-- ======= Footer ======= -->
+{{footer}}
+<!-- End Footer -->
+
+{{status}}
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    class="bi bi-arrow-up-short"></i></a>

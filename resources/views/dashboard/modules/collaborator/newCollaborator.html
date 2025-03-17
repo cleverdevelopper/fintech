@@ -34,7 +34,7 @@
                 <input type="date" name="text_data_nascimento" class="form-control"style="font-size: 14px; padding-top: 10px; padding-bottom: 10px;">
             </div>
             <div class="col-md-6">
-                <label for="inputState" class="form-label">Genero</label>
+                <label for="inputState" class="form-label">Género</label>
                 <select id="inputState" class="form-select" name="text_genero" style="font-size: 14px; padding-top: 10px; padding-bottom: 10px;">
                     <option>Selecione...</option>
                     <option value="Masculino">Masculino</option>
@@ -69,12 +69,12 @@
               </div>
     
               <div class="col-md-6">
-                <label for="inputText" class="form-label">Numero do Documento</label>
+                <label for="inputText" class="form-label">Número do Documento</label>
                 <input type="text" name="text_numero_documento" class="form-control" style="font-size: 14px; padding-top: 10px; padding-bottom: 10px;">
-                <label for=""><small style="font-size: 11px; color: #6f6f6f;">Digite o numero do documento previamente selecionado</small></label>
+                <label for=""><small style="font-size: 11px; color: #6f6f6f;">Digite o número do documento previamente selecionado</small></label>
               </div>
               <div class="col-md-6">
-                <label for="inputText" class="form-label">Local de Emissao</label>
+                <label for="inputText" class="form-label">Local de Emissão</label>
                 <select id="inputState" class="form-select" name="text_local_emissao" style="font-size: 14px; padding-top: 10px; padding-bottom: 10px;">
                   <option>Selecione...</option>
                   <option value="Niassa">Niassa</option>
@@ -92,18 +92,18 @@
               </div>
 
               <div class="col-md-6">
-                <label for="inputText" class="form-label">Data de Emissao do Documento</label>
+                <label for="inputText" class="form-label">A data de Emissão</label>
                 <input type="date" name="text_data_emissao" class="form-control" style="font-size: 14px; padding-top: 10px; padding-bottom: 10px;">
               </div>
 
               <div class="col-md-6">
-                <label for="inputText" class="form-label">Data de Expiracao</label>
+                <label for="inputText" class="form-label">A data de expiração</label>
                 <input type="date" name="text_data_expiracao" class="form-control" style="font-size: 14px; padding-top: 10px; padding-bottom: 10px;">
               </div>
 
-              <h6 class="card-title list-group-item list-group-item-primary" style="padding-left: 10px; color: rgb(67, 67, 67);" ><i class="bi bi-telephone me-1 text-success"></i> Dados de Contacto e Residencia</h6>
+              <h6 class="card-title list-group-item list-group-item-primary" style="padding-left: 10px; color: rgb(67, 67, 67);" ><i class="bi bi-telephone me-1 text-success"></i> Dados de Contacto e Residência </h6>
               <div class="col-md-6">
-                <label for="inputText" class="form-label">Distrito de Residencia</label>
+                <label for="inputText" class="form-label">Distrito de Residência</label>
                 <input type="text" name="text_distrito" class="form-control" style="font-size: 14px; padding-top: 10px; padding-bottom: 10px;" placeholder="Digite o distrito de Residencia">
             </div>
             <div class="col-md-6">
@@ -111,17 +111,18 @@
               <input type="text" name="text_cidade" class="form-control" style="font-size: 14px; padding-top: 10px; padding-bottom: 10px;" placeholder="Digite a Cidade ou Vila">
           </div>
           <div class="col-md-6">
-            <label for="inputText" class="form-label">Endereco</label>
+            <label for="inputText" class="form-label">Endereço</label>
             <input type="text" name="text_endereco" class="form-control" style="font-size: 14px; padding-top: 10px; padding-bottom: 10px;" placeholder="Rua, Avenida, bairro">
         </div>
-              <div class="col-md-6">
-                <label for="inputText" class="form-label">Numero do celular</label>
-                <input type="text" name="text_celular" class="form-control" style="font-size: 14px; padding-top: 10px; padding-bottom: 10px;" placeholder="Digite o numero de celular">
-            </div>
             <div class="col-md-6">
-                <label for="inputText" class="form-label">Numero do celular alternativo</label>
-                <input type="text" name="text_celular_alt" class="form-control" style="font-size: 14px; padding-top: 10px; padding-bottom: 10px;" placeholder="Digite o numero de celular alternativo">
-            </div>
+              <label for="inputText" class="form-label">Número do celular</label>
+              <input type="text" name="text_celular" class="form-control" style="font-size: 14px; padding-top: 10px; padding-bottom: 10px;" placeholder="Digite o numero de celular" maxlength="9" oninput="this.value = this.value.replace(/\D/g, '')">
+          </div>
+          <div class="col-md-6">
+              <label for="inputText" class="form-label">Número do celular alternativo</label>
+              <input type="text" name="text_celular_alt" class="form-control" style="font-size: 14px; padding-top: 10px; padding-bottom: 10px;" placeholder="Digite o numero de celular alternativo" maxlength="9" oninput="this.value = this.value.replace(/\D/g, '')">
+          </div>
+          
 
             <div class="col-md-6">
                 <label for="inputText" class="form-label">Email</label>
@@ -129,7 +130,10 @@
             </div>
             <div class="col-md-6">
                 <label for="inputText" class="form-label">Senha</label>
-                <input type="text" name="text_password" class="form-control" style="font-size: 14px; padding-top: 10px; padding-bottom: 10px;" placeholder="Senha padrao">
+                <select id="inputState" class="form-select" name="text_password" style="font-size: 14px; padding-top: 10px; padding-bottom: 10px;">
+                  <option>Selecione...</option>
+                  {{senha}}
+              </select>
                 <label for=""><small style="font-size: 11px; color: #6f6f6f;">Esta senha devera ser trocada pelo colaborador no acto do login</small></label>
             </div>
             <div class="col-md-6">
@@ -143,7 +147,6 @@
             <div class="col-md-12">
                 <label for="inputText" class="form-label">Anexar Documento</label>
                 <input type="file" name="file_documento" class="form-control" style="font-size: 14px; padding-top: 10px; padding-bottom: 10px;">
-                <label for=""><small style="font-size: 11px; color: #6f6f6f;">Previlegios do colaborador no sistema, Admin, Operador, etc</small></label>
             </div>
             <div class="text-center">
               <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Salvar</button>

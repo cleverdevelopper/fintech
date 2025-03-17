@@ -11,7 +11,7 @@
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{URL}}">Home</a></li>
-          <li class="breadcrumb-item active">Meus Movimentos</li>
+          <li class="breadcrumb-item active">Movimentos</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -26,6 +26,56 @@
             <div class="col-12">
               <div class="card recent-sales overflow-auto">
 
+
+                <div class="modal fade" id="clientModal" tabindex="-1" aria-labelledby="clientModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg modal-dialog-centered">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                      <h5 class="modal-title" id="clientModalLabel">Detalhes do Cliente</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+
+                          <h5 class="card-title">Dados Pessoais</h5>
+                          <div class="row">
+                            <div class="col-lg-3 col-md-4 label">Numero de Conta:</div>
+                            <div class="col-lg-9 col-md-8" id="numero_conta">{{numero_conta}}</div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-3 col-md-4 label">Nome Completo:</div>
+                            <div class="col-lg-9 col-md-8" id="nome-completo">{{nome_completo}}</div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-3 col-md-4 label">Saldo Disponivel:</div>
+                            <div class="col-lg-9 col-md-8" id="saldo"> {{saldo}}</div>
+                          </div>
+      
+                          <h5 class="card-title">Montante e Comprovativo</h5>
+                          <form class="row g-3" method="POST" enctype="multipart/form-data">
+                              <input type="hidden" name="text_codigo_cliente" value="{{codigo_conta_cliente}}">
+                              <div class="col-md-6">
+                                  <label for="inputName5" class="form-label">Montante a Depositar</label>
+                                  <input type="number" name="text_montante_deposito" class="form-control" id="inputName5">
+                              </div>
+                              <div class="col-md-6">
+                                  <label for="inputName5" class="form-label">Comprovativo</label>
+                                  <input type="file" name="imagem" class="form-control" id="inputName5">
+                                  <label for=""><small style="font-size: 11px; color: #6f6f6f;">Anexe um comprovativo (Ex: PDF, Imagem, Screenshot, etc)</small></label>
+                              </div>
+                        </div>
+                      <div class="modal-footer">
+                          <div class="text-center" style="width: 100%; display: flex; justify-content: center; align-items: center;">
+                              <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Realizar Deposito</button>
+                              <button type="button" style="margin-left: 10px;" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                          </div>
+                      </div>
+                  </form>
+                  </div>
+                  </div>
+              </div>
+
+
+            
                 <div class="filter">
                   <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -38,10 +88,10 @@
                     <li><a class="dropdown-item" href="#">This Year</a></li>
                   </ul>
                 </div>
-
                 <div class="card-body">
-                  <h5 class="card-title">Meus Movimentos</h5>
-                  <div class="" style=" width: 100%; display: flex; justify-content: flex-end;">
+                  <h5 class="card-title">Movimentos</h5>
+                  <div class="" style=" width: 100%; display: flex; justify-content: flex-end; margin-bottom: 10px;">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#clientModal"><i class="bi bi-cash-stack"></i> Novo Depositar</button>
                   </div>
                   <table class="table table-borderless datatable">
                     <thead>
@@ -49,9 +99,8 @@
                         <th scope="col">Data</th>
                         <th scope="col">Data Valor</th>
                         <th scope="col">Referencia</th>
-                        <th scope="col">Descricao</th>
-                        <th scope="col">Debito / Credito</th>
-                        <th scope="col">Montante</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Montante em MZN</th>
                         <th scope="col">Comprovativo</th>
                         <th scope="col">Saldo</th>
                       </tr>

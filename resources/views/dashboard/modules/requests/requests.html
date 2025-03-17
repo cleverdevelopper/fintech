@@ -1,0 +1,319 @@
+  <style>
+      /* O fundo do modal */
+      #imageModal {
+        display: none; 
+        position: fixed; 
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4); 
+      }
+
+      /* A imagem dentro do modal */
+      .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+      }
+
+      /* A legenda da imagem */
+      #caption {
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+      }
+
+      /* Fechar o modal (X) */
+      .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: #bbb;
+        cursor: pointer;
+      }
+
+      /* Ajuste de responsividade */
+      @media only screen and (max-width: 700px) {
+        .modal-content {
+          width: 100%;
+        }
+      }
+  </style>
+  
+  <!-- ======= Header ======= -->
+  {{navbar}}
+
+  <!-- ======= Sidebar ======= -->
+  {{sidebar}}
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Requisições </h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{URL}}">Home</a></li>
+          <li class="breadcrumb-item active">Requisições </li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">
+            <!-- Recent Sales -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Requisições</h5>
+                  <div class="" style=" width: 100%; display: flex; justify-content: flex-end;"> </div>
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">Data</th>
+                        <th scope="col">Data Valor</th>
+                        <th scope="col">Referência</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Montante</th>
+                        <th scope="col">Acções</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {{requests}}
+                    </tbody>
+                  </table>
+
+                </div>
+                <!--Modal-->  
+                <div class="modal fade" id="modalDarParecer" tabindex="-1" aria-labelledby="modalDarParecerLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg modal-dialog-centered">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                      <h5 class="modal-title" id="clientModalLabel">Detalhes do Cliente</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="row">
+                            <div class="col-lg-3 col-md-4 label">Numero de Conta:</div>
+                            <div class="col-lg-9 col-md-8" id="numero_conta"></div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-3 col-md-4 label">Nome Completo:</div>
+                            <div class="col-lg-9 col-md-8" id="nome-completo"></div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-3 col-md-4 label">Contacto:</div>
+                            <div class="col-lg-9 col-md-8" id="contacto"></div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-3 col-md-4 label">Outro Contacto:</div>
+                            <div class="col-lg-9 col-md-8" id="contacto-alt"></div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-3 col-md-4 label">Data:</div>
+                            <div class="col-lg-9 col-md-8" id="data"></div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-3 col-md-4 label">Data Valor:</div>
+                            <div class="col-lg-9 col-md-8" id="data_valor"></div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-3 col-md-4 label">Tipo Transacao:</div>
+                            <div class="col-lg-9 col-md-8" id="tipo_transacao"></div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-3 col-md-4 label">Referencia:</div>
+                            <div class="col-lg-9 col-md-8" id="referencia"></div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-3 col-md-4 label">Descricao:</div>
+                            <div class="col-lg-9 col-md-8" id="descricao"></div>
+                          </div>
+              
+                          <div class="row">
+                            <div class="col-lg-3 col-md-4 label">Saldo Disponivel:</div>
+                            <div class="col-lg-9 col-md-8 text-success" style="font-weight: 600;" id="saldo"></div>
+                          </div>
+
+                          <h5 class="card-title">Montante e Comprovativo</h5>
+                          <div class="row g-3" style="margin-bottom: 10px;">
+                              <div class="col-md-6">
+                                <label for="inputName5" class="form-label">Montante</label>
+                                <div class="col-lg-9 col-md-12 text-primary" id="montante" style="font-size: 20px;">
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="inputName5" class="form-label">Comprovativo</label>
+                                <!-- Modal para visualização da imagem -->
+                                <div id="imageModal" class="modal">
+                                  <span class="close">&times;</span>
+                                  <img class="modal-content" id="img01">
+                                  <div id="caption"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-12">
+                                  <img  alt="Imagem para pré-visualização" class="img-thumbnail" id="myImg" style="width:100px; cursor: pointer;">
+                                </div>
+                                
+                              </div>
+                          </div>
+
+                          <form class="row g-3" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="text_codigo_movimento" id="hidden_codigo_movimento">
+                            <div class="modal-footer">
+                                <div class="text-center" style="width: 100%; display: flex; justify-content: center; align-items: center;">
+                                    <!-- Botão Aprovar -->
+                                    <button type="submit" class="btn btn-success" name="status" value="Aprovado" style="margin-right: 10px;">
+                                        <i class="bi bi-check-circle"></i> Aprovar
+                                    </button>
+                        
+                                    <!-- Botão Rejeitar -->
+                                    <button type="submit" class="btn btn-danger" name="status" value="Rejeitado">
+                                        <i class="bi bi-x-circle"></i> Rejeitar
+                                    </button>
+                        
+                                    <!-- Botão Cancelar -->
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">Cancelar</button>
+                                </div>
+                            </div>
+                        </form>                        
+                      </div>
+                  </div>
+              </div>
+            <!-- Modal para visualização da imagem -->
+            <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content image-modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">Pré-visualização do Comprovativo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body text-center">
+                    <!-- Exibir a imagem em tamanho maior -->
+                    <img src="" id="previewImage" class="img-fluid" alt="Imagem do Comprovativo" style="width: 100%; max-width: 700px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+   {{footer}}
+  <!-- End Footer -->
+
+  {{status}}
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script>
+    $('#modalDarParecer').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+
+        $.ajax({
+          url: 'http://127.0.0.1:8888/fintech/api/movimentos',
+          method: 'GET',
+          success: function(response) {
+            // Filtrar o dado correto com base no ID
+            var movimento = response.find(function(item) {
+              return item.id === id;
+            });
+
+            if (movimento) {
+              // Preencher os campos do modal com os dados recebidos
+              $('#numero_conta').text(movimento.numero_conta);
+              $('#nome-completo').text(movimento.name);
+              $('#contacto').text(movimento.celular);
+              $('#contacto-alt').text(movimento.celular_alt);
+              $('#data').text(movimento.data);
+              $('#data_valor').text(movimento.data_valor);
+              $('#tipo_transacao').text(movimento.tipo_transacao);
+              $('#referencia').text(movimento.referencia);
+              $('#descricao').text(movimento.descricao);
+              $('#saldo').text(movimento.saldo);
+              $('#montante').text(movimento.montante);
+
+
+              //Preenchimento dos campos Escondidos
+              $('#hidden_codigo_movimento').val(movimento.id);
+              $('#hidden_numero_conta').val(movimento.numero_conta);
+
+
+              $('#myImg').attr('src', 'images/depositos/' + movimento.talao_transacao);
+
+
+
+            } else {
+              alert("Dados não encontrados.");
+            }
+          },
+          error: function() {
+            alert('Erro ao carregar os dados');
+          }
+        });
+      });
+
+  </script>
+
+
+<script>
+    // Quando a imagem é clicada, exibe o modal
+    var modal = document.getElementById("imageModal");
+    var img = document.getElementById("myImg");  // A imagem que vai abrir o modal
+    var modalImg = document.getElementById("img01");  // A imagem dentro do modal
+    var captionText = document.getElementById("caption");  // A legenda no modal
+
+    // Evento de clique na imagem
+    img.onclick = function() {
+      modal.style.display = "block";  // Exibe o modal
+      modalImg.src = this.src;  // Define o src da imagem no modal
+      captionText.innerHTML = this.alt;  // Define a legenda da imagem, se necessário
+    }
+
+    // Quando o usuário clicar no "X" para fechar o modal
+    var span = document.getElementsByClassName("close")[0];
+    span.onclick = function() {
+      modal.style.display = "none"; 
+    }
+
+    // Fechar o modal quando clicar em qualquer área fora da imagem
+    window.onclick = function(event) {
+      if (event.target == modal) {  
+        modal.style.display = "none"; 
+      }
+    }
+</script>
+
+

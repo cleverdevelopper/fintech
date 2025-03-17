@@ -7,6 +7,7 @@ use App\Controller\PageController;
     use App\Model\Entity\ContasEntity;
 use App\Model\Entity\DepositosEntity;
 use App\Model\Entity\GroupEntity;
+use App\Model\Entity\SenhaEntity;
 use App\Utils\ViewManager;
     use App\Utils\Funcoes;
 
@@ -16,14 +17,26 @@ use App\Utils\ViewManager;
         private static function getgrupoItem(){
             $itens = '';
             $results = GroupEntity::getGrupos(null, 'codigo_grupo', null);
-            While ($objGrupo = $results->fetchObject(ClienteEntity::class)){
+            While ($objGrupo = $results->fetchObject(GroupEntity::class)){
                 $itens .=ViewManager::render('dashboard/modules/collaborator/grupoItem', [
                     'codigo'              => $objGrupo->codigo_grupo,
-                    'grupo'        => $objGrupo->nome_grupo,
+                    'grupo'               => $objGrupo->nome_grupo,
                 ]);
             }
             return $itens;
         }
+
+        private static function getSenhaItem(){
+            $itens = '';
+            $results = SenhaEntity::getSenha(null, 'codigo_senha_config', null);
+            While ($objSenha = $results->fetchObject(SenhaEntity::class)){
+                $itens .=ViewManager::render('dashboard/modules/collaborator/senhaItem', [
+                    'senha'              => $objSenha->senha
+                ]);
+            }
+            return $itens;
+        }
+
 
         public static function setNewCollabPage($request){
             if(Funcoes::Permition(0)){
@@ -68,6 +81,7 @@ use App\Utils\ViewManager;
                     'grupos'        => self::getgrupoItem(),
                     'footer'        => parent::getFooter(),
                     'items'         => self::getCollabItem(),
+                    'senha'         => self::getSenhaItem(),
                     'status'        => self::getStatus($request) 
                 ]);
 
@@ -128,40 +142,6 @@ use App\Utils\ViewManager;
 
                 return parent::getPage('FINTECH | Clientes', $content);
             } 
-        }
-
-        private static function gerarReferenciaUnica() {
-            $timestamp = time();  // Obtém o timestamp atual (número de segundos desde 1970)
-            $referencia = 'REF' . substr($timestamp, -6);  // Pega os últimos 6 dígitos do timestamp
-            return $referencia;
-        }
-
-
-        // funcao para pesquisar cliente e fazer deposito
-        public static function setNewDepositPage($request){
-            if(Funcoes::Permition(0)){
-                $file = $request->getFile();
-                $postVars = $request->getPostVars();
-
-                $objDeposito = new DepositosEntity;
-                $objDeposito->codigo_cliente         = $postVars['text_codigo_cliente'];
-                $objDeposito->data                   = parent::getNowDate();
-                $objDeposito->data_valor             = parent::getNowDate();
-                $objDeposito->referencia             = self::gerarReferenciaUnica();
-                $objDeposito->descricao              = 'Depósito em dinheiro';
-                $objDeposito->codigo_conta           = $postVars['text_codigo_conta'];
-                $objDeposito->numero_conta           = $postVars['text_numero_conta'];
-                $objDeposito->montante               = $postVars['text_montante_deposito'];
-                $objDeposito->tipo_transacao         = 'Deposito';
-                $objDeposito->talao_transacao        = $file;
-                $objDeposito->criado_em              = parent::getNowDateTime();
-                $objDeposito->atualizado_em          = parent::getNowDateTime();
-
-                $objDeposito->cadastrar();
-                $request->getRouter()->redirect('/search-collaborator?status=deposit');
-            }/*else{
-                return ErrorController::getError($request);
-            }*/
         }
 
 

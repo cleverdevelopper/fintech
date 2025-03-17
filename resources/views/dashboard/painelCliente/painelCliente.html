@@ -49,7 +49,7 @@
                     </div>
                     <div class="ps-3">
                       <h6> <label for="" style="font-size: 15px;">MZN</label> {{saldo}}</h6>
-                      <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                      <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">de valorização</span>
 
                     </div>
                   </div>
@@ -84,7 +84,7 @@
                     </div>
                     <div class="ps-3">
                       <h6> <label for="" style="font-size: 15px;">MZN</label>  {{loan}}</h6>
-                      <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                      <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">de Redução</span>
 
                     </div>
                   </div>
@@ -92,10 +92,42 @@
 
               </div>
             </div><!-- End Revenue Card -->
+             <!-- Revenue Card -->
+             <div class="col-xxl-4 col-md-6">
+              <div class="card info-card revenue-card">
 
-            <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
 
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Minha Participação <span>| Total</span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-bank"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6> {{participation}} %</h6>
+                      <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">de valorização</span>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Revenue Card -->
+             <!-- Revenue Card -->
+             <div class="col-xxl-4 col-md-6">
               <div class="card info-card customers-card">
 
                 <div class="filter">
@@ -112,23 +144,22 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Minha Participacao<span>| Total</span></h5>
+                  <h5 class="card-title">Minhas Requisições <span>| Total</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-bank"></i>
+                      <i class="bi bi-hourglass-bottom"></i>
                     </div>
                     <div class="ps-3">
-                      <h6> {{participation}} %</h6>
-                      <span class="text-danger small pt-1 fw-bold">0%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+                      <h6> <label for="" style="font-size: 15px;"></label>  {{requisicoes}}</h6>
+                      <span class="text-success small pt-1 fw-bold"><i class="bi bi-watch"></i></span><span class="text-muted small pt-2 ps-1">Agaurdando Aprovação</span>
 
                     </div>
                   </div>
-
                 </div>
-              </div>
 
-            </div><!-- End Customers Card -->
+              </div>
+            </div><!-- End Revenue Card -->
 
             <!-- Recent Sales -->
             <div class="col-12">
@@ -148,93 +179,22 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Ultimos Movimentos <span>| Today</span></h5>
+                  <h5 class="card-title">Últimos Movimentos <span>| Today</span></h5>
                   <!-- Default Table -->
                   <table class="table table-borderless">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Position</th>
-                        <th scope="col">Age</th>
-                        <th scope="col">Start Date</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Data Valor</th>
+                        <th scope="col">Referência </th>
+                        <th scope="col">Montante</th>
+                        <th scope="col">Situação </th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td>Brandon Jacob</td>
-                        <td>Designer</td>
-                        <td>28</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td>Bridie Kessler</td>
-                        <td>Developer</td>
-                        <td>35</td>
-                        <td><span class="badge bg-danger">Rejected</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td>Ashleigh Langosh</td>
-                        <td>Finance</td>
-                        <td>45</td>
-                        <td><span class="badge bg-warning">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td>Angus Grady</td>
-                        <td>HR</td>
-                        <td>34</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td>Raheem Lehner</td>
-                        <td>Dynamic Division Officer</td>
-                        <td>47</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td>Brandon Jacob</td>
-                        <td>Designer</td>
-                        <td>28</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td>Bridie Kessler</td>
-                        <td>Developer</td>
-                        <td>35</td>
-                        <td><span class="badge bg-danger">Rejected</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td>Ashleigh Langosh</td>
-                        <td>Finance</td>
-                        <td>45</td>
-                        <td><span class="badge bg-warning">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td>Angus Grady</td>
-                        <td>HR</td>
-                        <td>34</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td>Raheem Lehner</td>
-                        <td>Dynamic Division Officer</td>
-                        <td>47</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
+                      {{request_moviments}}
                     </tbody>
                   </table>
-                  <!-- End Default Table Example -->
-
                 </div>
 
               </div>

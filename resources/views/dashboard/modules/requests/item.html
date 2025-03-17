@@ -1,0 +1,23 @@
+<tr>
+    <th scope="row"><a href="#">{{data}}</a></th>
+    <td>{{data_valor}}</td>
+    <td>{{referencia}}</td>
+    <td>{{tipo}}</td>
+    <td style="text-align: right;">
+      <span class="badge {{border}} border-1 {{text}}" style="font-size: 14px;">{{icon}} {{montante}}</span>
+    </td>
+    <td>
+      <div class="dropdown" style="align-items: center; float: right;">
+          <button type="button" style="font-size: 13px;" class="btn btn-info btn-sm dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-info-circle" style="font-size: 11px; padding-right: 3px"></i> Acções</button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li>
+                <button class="dropdown-item depositarBtn" 
+                        data-id="{{codigo_movimento}}"
+                        data-bs-toggle="modal" 
+                        data-bs-target="#modalDarParecer">Dar parecer</button>
+              </li>
+              <li><a class="dropdown-item" href="#">Editar</a></li>
+          </ul>
+      </div>
+    </td>
+  </tr>

@@ -14,6 +14,7 @@
         public $montante;
         public $tipo_transacao; 
         public $talao_transacao; 
+        public $status; 
         public $criado_em;
         public $atualizado_em; 
         public $apagado_em; 
@@ -30,6 +31,7 @@
                 'montante'                  => $this->montante,
                 'tipo_transacao'            => $this->tipo_transacao,
                 'talao_transacao'           => $this->talao_transacao,
+                'status'                    => $this->status,
                 'criado_em'                 => $this->criado_em,
                 'atualizado_em'             => $this->atualizado_em,
                 'apagado_em'                => $this->apagado_em
@@ -45,9 +47,16 @@
             return self::getDepositos('codigo_movimento = '.$id)->fetchObject(self::class);
         }
 
+        public  function actualizarDeposito(){
+            return (new Database('movimentos'))->update('codigo_movimento = '.$this->codigo_movimento, [
+                'status'                    => $this->status,
+                'atualizado_em'             => $this->atualizado_em
+            ]);
+        }
+
         public  function actualizar(){
             return (new Database('movimentos'))->update('codigo_movimento = '.$this->codigo_movimento, [
-               'codigo_cliente'            => $this->codigo_cliente,
+                'codigo_cliente'            => $this->codigo_cliente,
                 'data'                      => $this->data,
                 'data_valor'                => $this->data_valor,
                 'referencia'                => $this->referencia,
@@ -57,6 +66,7 @@
                 'montante'                  => $this->montante,
                 'tipo_transacao'            => $this->tipo_transacao,
                 'talao_transacao'           => $this->talao_transacao,
+                'status'                    => $this->status,
                 'criado_em'                 => $this->criado_em,
                 'atualizado_em'             => $this->atualizado_em,
                 'apagado_em'                => $this->apagado_em

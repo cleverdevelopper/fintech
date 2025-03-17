@@ -138,6 +138,7 @@
                             <th scope="col">Contacto</th>
                             <th scope="col">Estado</th>
                             <th scope="col">Saldo</th>
+                            <th scope="col">Acções</th>
                           </tr>
                         </thead>
                         <tbody id="clients-table-body">
@@ -166,82 +167,102 @@
   
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-<script>
-    document.getElementById("search-form").addEventListener("submit", function(event) {
-    event.preventDefault();  // Previne o envio do formulário e recarregamento da página
-    const query = document.getElementById("text_client_search").value.toLowerCase();  // Obtém o valor da pesquisa e coloca em minúsculo
-    showSuggestions(query);
-});
 
-function showSuggestions(query) {
-    const suggestionsList = document.getElementById("clients-table-body");
-    suggestionsList.innerHTML = '';  // Limpa a tabela antes de mostrar os novos resultados
-
-    if (query.length === 0) {
-        return;  // Se o campo de pesquisa estiver vazio, não exibe sugestões
-    }
-
-    // Exemplo de requisição para a API usando fetch
-    fetch("http://127.0.0.1:8888/fintech/api/clientes?search=" + query)
-        .then(response => response.json())
-        .then(data => {
-            console.log('Dados recebidos da API:', data);  // Para depuração
-
-            // Filtra os dados recebidos para que apenas clientes com o nome correspondente à busca sejam exibidos
-            const filteredClients = data.filter(client => 
-                client.name.toLowerCase().includes(query)  // Compara nome (ignorando maiúsculas/minúsculas)
-            );
-
-            if (filteredClients.length > 0) {
-                filteredClients.forEach(client => {
-                    const tr = document.createElement("tr");
-
-                    tr.innerHTML = `
-                        <th scope="row">#${client.id}</th>
-                        <td>${client.numero_conta}</td>
-                        <td>${client.name}</td>
-                        <td><a href="#" class="text-primary">${client.celular}</a></td>
-                        <td><span class="badge bg-success">${client.estado}</span></td>
-                        <td>${client.saldo}</td>
-                    `;
-
-                    // Tornar a linha clicável
-                    tr.style.cursor = 'pointer';  // Indica que a linha é clicável
-                    tr.style.transition = 'background-color 0.3s';  // Adiciona uma transição suave para a cor de fundo
-                    tr.onclick = function() {
-                        // Preenche o modal com as informações do cliente
-                        document.getElementById("nome-completo").textContent = client.name;
-                        document.getElementById("tipo-documento").textContent = client.tipo_doc;
-                        document.getElementById("doc-number").textContent = client.documento;
-                        document.getElementById("contacto").textContent = client.celular;
-                        document.getElementById("contacto-alt").textContent = client.celular_alt;
-                        document.getElementById("endereco").textContent = client.endereco;
-                        document.getElementById("email").textContent = client.email;
-                        document.getElementById("numero_conta").textContent = client.numero_conta;
-                        document.getElementById("saldo").textContent = client.saldo +' MZN';
-                        
-                        
-                        // Preenche os campos hidden
-                        document.getElementById("hidden_codigo_conta").value = client.codigo_conta;  // Preenche o código da conta
-                        document.getElementById("hidden_numero_conta").value = client.numero_conta;  // Preenche o número da conta
-                        document.getElementById("hidden_codigo_cliente").value = client.id;  // Preenche o código do cliente
-
-                        // Abre o modal
-                        var myModal = new bootstrap.Modal(document.getElementById('clientModal'));
-                        myModal.show();
-                    };
-
-                    suggestionsList.appendChild(tr);
-                });
-            } else {
-                const tr = document.createElement("tr");
-                tr.innerHTML = '<td colspan="6" class="text-center">Nenhum cliente encontrado</td>';
-                suggestionsList.appendChild(tr);
-            }
-        })
-        .catch(error => {
-            console.error('Erro ao buscar dados da API:', error);
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Código de pesquisa
+        document.getElementById("search-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Previne o envio do formulário e recarregamento da página
+            const query = document.getElementById("text_client_search").value.toLowerCase(); // Obtém o valor da pesquisa
+            showSuggestions(query);
         });
-}
+    
+        function showSuggestions(query) {
+            const suggestionsList = document.getElementById("clients-table-body");
+            suggestionsList.innerHTML = ''; // Limpa a tabela
+    
+            if (query.length === 0) {
+                return; // Se o campo de pesquisa estiver vazio, não exibe sugestões
+            }
+    
+            fetch("http://127.0.0.1:8888/fintech/api/clientes?search=" + query)
+                .then(response => response.json())
+                .then(data => {
+                    const filteredClients = data.filter(client =>
+                        client.name.toLowerCase().includes(query)
+                    );
+    
+                    if (filteredClients.length > 0) {
+                        filteredClients.forEach(client => {
+                            const tr = document.createElement("tr");
+    
+                            tr.innerHTML = `
+                                <th scope="row">#${client.id}</th>
+                                <td>${client.numero_conta}</td>
+                                <td>${client.name}</td>
+                                <td><a href="#" class="text-primary">${client.celular}</a></td>
+                                <td><span class="badge bg-success">${client.estado}</span></td>
+                                <td>${client.saldo}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button type="button" style="font-size: 13px;" class="btn btn-info btn-sm dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-info-circle" style="font-size: 11px; padding-right: 3px"></i> Acções</button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <li><button class="dropdown-item depositarBtn" data-client='${JSON.stringify(client)}'>Depositar</button></li>
+                                            <li><a class="dropdown-item" href="#">Editar</a></li>
+                                            <li><a class="dropdown-item" href="#">Revogar</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            `;
+    
+                            suggestionsList.appendChild(tr);
+                        });
+                    } else {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = '<td colspan="7" class="text-center">Nenhum cliente encontrado</td>';
+                        suggestionsList.appendChild(tr);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar dados da API:', error);
+                });
+        }
+    
+        // Usando delegação de eventos para os botões "Depositar"
+        document.getElementById('clients-table-body').addEventListener('click', function(event) {
+            if (event.target && event.target.classList.contains('depositarBtn')) {
+              // Obter o objeto client como string do atributo 'data-client'
+              const clientString = event.target.getAttribute('data-client');
+              // Converter a string JSON de volta para um objeto
+              const client = JSON.parse(clientString);
+              // Passando o objecto cliente para a funcao
+              abrirModalDepositar(client);
+            }
+        });
+    
+        function abrirModalDepositar(client) {
+            // Preenche o modal com as informações do cliente
+            document.getElementById("nome-completo").textContent = client.name;
+            document.getElementById("tipo-documento").textContent = client.tipo_doc;
+            document.getElementById("doc-number").textContent = client.documento;
+            document.getElementById("contacto").textContent = client.celular;
+            document.getElementById("contacto-alt").textContent = client.celular_alt;
+            document.getElementById("endereco").textContent = client.endereco;
+            document.getElementById("email").textContent = client.email;
+            document.getElementById("numero_conta").textContent = client.numero_conta;
+            document.getElementById("saldo").textContent = client.saldo + ' MZN';
 
-</script>
+            // Preenche os campos hidden
+            document.getElementById("hidden_codigo_conta").value = client.codigo_conta;  // Preenche o código da conta
+            document.getElementById("hidden_numero_conta").value = client.numero_conta  // Preenche o número da conta
+            document.getElementById("hidden_codigo_cliente").value = client.id;  // Preenche o código do cliente
+
+            var myModal = new bootstrap.Modal(document.getElementById('clientModal'));
+            myModal.show();  // Mostrar o modal
+        }
+      });
+    </script>
+    
+
+
+
